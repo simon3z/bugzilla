@@ -8,7 +8,7 @@ client, err := bugzilla.NewClient(bugzillaURL, bugzillaUser, bugzillaPassword)
 if err != nil {
 	return err
 }
-bugzillaClient.BugList(limit, offset)
+client.BugList(limit, offset)
 ```
 
 ### bug details for #444
@@ -17,7 +17,7 @@ client, err := bugzilla.NewClient(bugzillaURL, bugzillaUser, bugzillaPassword)
 if err != nil {
 	return err
 }
-bugzillaClient.BugInfo(444)
+client.BugInfo(444)
 ```
 
 ### add comment to #444
