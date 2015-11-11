@@ -1,5 +1,5 @@
 # bugzilla
-Golnag client for bugzilla API
+Golang client for bugzilla API
 
 
 ### list bugs
@@ -11,7 +11,7 @@ if err != nil {
 bugzillaClient.BugList(limit, offset)
 ```
 
-### bug details for Bug 444
+### bug details for #444
 ```go
 client, err := bugzilla.NewClient(bugzillaURL, bugzillaUser, bugzillaPassword)
 if err != nil {
@@ -20,7 +20,7 @@ if err != nil {
 bugzillaClient.BugInfo(444)
 ```
 
-### add comment to bug 444
+### add comment to #444
 ```go
 client, err := bugzilla.NewClient(bugzillaURL, bugzillaUser, bugzillaPassword)
 if err != nil {
