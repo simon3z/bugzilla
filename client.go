@@ -92,14 +92,23 @@ func (client *Client) BugList(limit int, offset int) ([]Bug, error) {
 	return client.cgi.bugList(limit, offset)
 }
 
+// BugsSearch
+func (client *Client) BugsSearch() ([]Bug, error) {
+	return []Bug{}, nil
+}
+
 // BugzillaVersion returns Bugzilla version
 func (client *Client) BugzillaVersion() (version string, err error) {
 	return client.json.bugzillaVersion()
 }
 
+type BugInfoOptions struct {
+	IncludeFields []string
+}
+
 // BugInfo returns information about single bugzilla ticket
-func (client *Client) BugInfo(id int) (bugInfo map[string]interface{}, err error) {
-	bugsInfo, err := client.BugsInfo([]int{id})
+func (client *Client) BugInfo(id int, opts *BugInfoOptions) (bugInfo map[string]interface{}, err error) {
+	bugsInfo, err := client.BugsInfo([]int{id}, opts)
 	if err != nil {
 		return nil, err
 	}
@@ -110,8 +119,8 @@ func (client *Client) BugInfo(id int) (bugInfo map[string]interface{}, err error
 }
 
 // BugsInfo returns information about selected bugzilla tickets
-func (client *Client) BugsInfo(idList []int) (bugInfo []map[string]interface{}, err error) {
-	bugsInfo, err := client.json.bugsInfo(idList, client.bugzillaToken)
+func (client *Client) BugsInfo(idList []int, opts *BugInfoOptions) (bugInfo []map[string]interface{}, err error) {
+	bugsInfo, err := client.json.bugsInfo(idList, client.bugzillaToken, opts)
 	if err != nil {
 		return nil, err
 	}

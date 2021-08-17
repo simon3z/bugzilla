@@ -87,10 +87,11 @@ func (client *bugzillaJSONRPCClient) bugzillaVersion() (version string, err erro
 }
 
 // bugsInfo returns information about selected bugzilla tickets
-func (client *bugzillaJSONRPCClient) bugsInfo(idList []int, token string) (bugInfo map[string]interface{}, err error) {
+func (client *bugzillaJSONRPCClient) bugsInfo(idList []int, token string, opts *BugInfoOptions) (bugInfo map[string]interface{}, err error) {
 	args := make(map[string]interface{})
 	args["ids"] = idList
-	args["token"] = token
+	args["token"] = token                       // "_default",
+	args["include_fields"] = opts.IncludeFields // []string{"_default", "external_bugs"} // "_extra", "_custom"}
 
 	err = client.call("Bug.get", args, &bugInfo)
 	if err != nil {
